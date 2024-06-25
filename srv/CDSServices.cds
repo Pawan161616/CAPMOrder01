@@ -9,7 +9,7 @@ service CDSService@(path:'/CDSService') {
 // //@EndUserText.label annotation is like we  annotate Employee in datamodel.cds.
 // //  it will store label name in diferent languages.
 //     define view ProductValueHelp as 
-//        select from master.Product{
+//        select from master.Product{ 
 //         @EndUserText.label:[
 //             {
 //                 language:'EN',
