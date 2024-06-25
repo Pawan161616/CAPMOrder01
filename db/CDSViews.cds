@@ -79,41 +79,41 @@ context CDSViews {
              Order_Id as ![OrderId],
              Order_No as ![OrderNo],
              Item_No as ![ItemNo],
-             Qty as ![Quantity],
-             (
-                select from master.Product as a{
-                    Product_Id as ![ProductId]
-                }where a.Product_Id = OrderItem.Product_Id.Product_Id
-             )as ![ProductId]
+             Qty as ![Quantity]
+            //  (
+            //     select from master.Product as a{
+            //         Product_Id as ![ProductId]
+            //     }where a.Product_Id = OrderItem.Product_Id.Product_Id
+            //  )as ![ProductId]
        };
 
 //proection view
-       define view OrderView as select from master.Order
-       //mixin mean I am exposing this association out
-       mixin{
-          Orders: Association[*] to OrderItemView on
-                                     Orders.OrderId = $projection.OrderId
+//        define view OrderView as select from master.Order
+//        //mixin mean I am exposing this association out
+//        mixin{
+//           Orders: Association[*] to OrderItemView on
+//                                      Orders.OrderId = $projection.OrderId
                          
-       }into{
-        Order_Id as ![OrderId],
-        Order_No as ![OrderNumber],
-        Customer_Name as ![CustomerName],
-        //here Order_Item is association of Order table , Product_Id is of Order item table linking to Product table field product_Name field
-        //this is how we navigate from one table to another via associations
-        Order_Items.Product_Id.Product_Name as ![ProductName],
-        //if we want to use field of orderItemView, then find with what name it's associated to orderView i.e, "Orders"
-        //then use it as normal association <association>.<field name of associated view>
-        sum(Orders.Quantity) as ![TotalQuantity],
-        Orders.OrderItemId as ![OrderItemId]    
-       }
+//        }into{
+//         Order_Id as ![OrderId],
+//         Order_No as ![OrderNumber],
+//         Customer_Name as ![CustomerName],
+//         //here Order_Item is association of Order table , Product_Id is of Order item table linking to Product table field product_Name field
+//         //this is how we navigate from one table to another via associations
+//         Order_Items.Product_Id.Product_Name as ![ProductName],
+//         //if we want to use field of orderItemView, then find with what name it's associated to orderView i.e, "Orders"
+//         //then use it as normal association <association>.<field name of associated view>
+//         sum(Orders.Quantity) as ![TotalQuantity],
+//         Orders.OrderItemId as ![OrderItemId]    
+//        }
 
-       //consumption view
-       define view COrderView as 
-       select from OrderView{
-        OrderId,
-        OrderNumber,
-        ProductName
-       }
-       group by OrderId,OrderNumber
+//        //consumption view
+//        define view COrderView as 
+//        select from OrderView{
+//         OrderId,
+//         OrderNumber,
+//         ProductName
+//        }
+//        group by OrderId,OrderNumber
 }
 

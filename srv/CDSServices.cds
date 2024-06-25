@@ -2,9 +2,9 @@ using {pawan.db.CDSViews } from '../db/CDSViews';
 using {pawan.db.master} from '../db/datamodel';
 //we will expose our cds views here
 service CDSService@(path:'/CDSService') {
-    // entity OrderWorklist as projection on CDSViews.OrderWorklist;
+    entity OrderWorklist as projection on CDSViews.OrderWorklist;
     entity OrderItemSrv as projection on CDSViews.OrderItemView;
-    entity OrderAggregation as projection on CDSViews.COrderView;
+    // entity OrderAggregation as projection on CDSViews.COrderView;
      
 // //@EndUserText.label annotation is like we  annotate Employee in datamodel.cds.
 // //  it will store label name in diferent languages.
